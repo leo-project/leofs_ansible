@@ -1,0 +1,3 @@
+---
+dependencies:
+    - { role: common, leofs_module: leo_manager_1 }

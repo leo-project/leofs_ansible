@@ -1,0 +1,23 @@
+---
+
+- name: Create the LeoManager (Primary) Configuration File
+  become: True
+  template: src=leo_manager_0.conf.j2 dest={{ leofs_module_conf_path }}/leo_manager.conf
+  tags:
+      - config
+
+- name: Stop LeoManager (Primary)
+  become: True
+  command: bin/leo_manager stop
+  args:
+    chdir: "{{ leofs_module_path }}"
+  tags:
+      - stop
+
+- name: Run LeoManager (Primary)
+  become: True
+  command: bin/leo_manager start
+  args:
+    chdir: "{{ leofs_module_path }}"
+  tags:
+      - run

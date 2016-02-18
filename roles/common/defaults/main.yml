@@ -1,0 +1,16 @@
+---
+leofs_log_level: 0
+leofs_access_log: False
+leofs_diagnosis_log: True
+erlang_secio: True
+
+leofs_install_path: /usr/local/leofs/1.2.18/
+leofs_module_path: "{{ leofs_install_path }}/{{ leofs_module }}/"
+leofs_module_conf_path: "{{ leofs_module_path }}/etc/"
+leofs_module_nodename: "{{ leofs_module }}@{{ inventory_hostname }}"
+
+leofs_work_dir: "{{ leofs_module_path }}/work"
+leofs_mnesia_dir: "{{ leofs_work_dir }}/mnesia/"
+leofs_queue_dir: "{{ leofs_work_dir }}/queue/"
+leofs_stack_dir: "{{ leofs_work_dir }}/ord_reda/"
+leofs_log_dir: "{{ leofs_module_path }}/log"

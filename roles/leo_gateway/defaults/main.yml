@@ -1,0 +1,8 @@
+---
+leo_gateway_timeout_level_1: 5000
+leo_gateway_timeout_level_2: 7000
+leo_gateway_timeout_level_3: 10000
+leo_gateway_timeout_level_4: 20000
+leo_gateway_timeout_level_5: 30000
+leo_gateway_timeout_get: 30000
+leo_gateway_timeout_ls: 30000

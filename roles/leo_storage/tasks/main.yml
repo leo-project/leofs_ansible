@@ -1,0 +1,23 @@
+---
+
+- name: Create the LeoStorage Configuration File
+  become: True
+  template: src=leo_storage.conf.j2 dest={{ leofs_module_conf_path }}/leo_storage.conf
+  tags:
+      - config
+
+- name: Stop LeoStorage
+  become: True
+  command: bin/leo_storage stop
+  args:
+    chdir: "{{ leofs_module_path }}"
+  tags:
+      - stop
+
+- name: Run LeoStorage
+  become: True
+  command: bin/leo_storage start
+  args:
+    chdir: "{{ leofs_module_path }}"
+  tags:
+      - run

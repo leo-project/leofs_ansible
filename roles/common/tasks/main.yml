@@ -1,0 +1,46 @@
+---
+
+- name: Copy LeoFS Package
+  copy: src={{ leofs_package }} dest=/tmp/
+  tags:
+      - install
+
+- name: Install LeoFS Package
+  become: True
+  apt: deb=/tmp/{{ leofs_package }}
+  tags:
+      - install
+
+- name: Prepare Directories
+  become: True
+  file: 
+      path: "{{ item }}"
+      state: directory
+  with_items:
+      - "{{ leofs_work_dir }}"
+      - "{{ leofs_mnesia_dir }}"
+      - "{{ leofs_queue_dir }}"
+      - "{{ leofs_stack_dir }}"
+      - "{{ leofs_log_dir }}"
+  tags:
+      - config
+
+- name: Force Stop
+  become: True
+  command: pkill beam.smp 
+  ignore_errors: True
+  tags:
+      - killbeam
+
+- name: Uninstall LeoFS Package
+  become: True
+  apt: name=leofs state=absent
+  tags:
+      - uninstall
+      - purge
+
+- name: Purge LeoFS
+  become: True
+  file: path={{ leofs_install_path }} state=absent
+  tags:
+      - purge
