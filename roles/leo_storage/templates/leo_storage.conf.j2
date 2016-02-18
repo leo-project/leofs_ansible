@@ -44,8 +44,8 @@ managers = {{ leo_managers }}
 ## STORAGE
 ## --------------------------------------------------------------------
 ## Object container
-obj_containers.path = {{ leo_storage_container_path }} 
-obj_containers.num_of_containers = {{ leo_storage_num_of_containers }}
+obj_containers.path = [{{ leo_storage_container_paths|join(",") }}] 
+obj_containers.num_of_containers = [{{ leo_storage_num_of_containers|join(",") }}]
 
 ## e.g. Case of plural pathes
 ## obj_containers.path = [/var/leofs/avs/1, /var/leofs/avs/2]

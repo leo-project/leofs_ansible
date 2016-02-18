@@ -1,3 +1,5 @@
 ---
-leo_storage_container_path: "[./avs]"
-leo_storage_num_of_containers: "[8]"
+leo_storage_container_paths:
+    - "{{ leofs_module_path }}/avs"
+leo_storage_num_of_containers: 
+    - 8

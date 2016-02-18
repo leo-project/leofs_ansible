@@ -1,5 +1,15 @@
 ---
 
+- name: Prepare Container Directories for LeoStorage
+  become: True
+  file:
+      path: "{{ item }}"
+      state: directory
+  with_items: 
+      - "{{ leo_storage_container_paths }}" 
+  tags:
+      - config
+
 - name: Create the LeoStorage Configuration File
   become: True
   template: src=leo_storage.conf.j2 dest={{ leofs_module_conf_path }}/leo_storage.conf
