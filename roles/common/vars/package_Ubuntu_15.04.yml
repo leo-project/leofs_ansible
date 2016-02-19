@@ -1,0 +1,2 @@
+---
+leofs_package: "{{ leofs_packages['deb_ubuntu_1504'].name }}"

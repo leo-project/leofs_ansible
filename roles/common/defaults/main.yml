@@ -4,7 +4,8 @@ leofs_access_log: False
 leofs_diagnosis_log: True
 erlang_secio: True
 
-leofs_install_path: /usr/local/leofs/1.2.18/
+leofs_version: 1.2.18
+leofs_install_path: /usr/local/leofs/{{ leofs_version }}/
 leofs_module_path: "{{ leofs_install_path }}/{{ leofs_module }}/"
 leofs_module_conf_path: "{{ leofs_module_path }}/etc/"
 leofs_module_nodename: "{{ leofs_module }}@{{ inventory_hostname }}"

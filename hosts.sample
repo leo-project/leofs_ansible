@@ -1,3 +1,6 @@
+[all:vars]
+leofs_version=1.2.18
+
 [leo_manager_0]
 192.168.100.35 
 

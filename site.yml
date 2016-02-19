@@ -2,19 +2,8 @@
 
 - hosts: localhost
   gather_facts: False
-  tasks:
-      - name: Setup LeoFS Admin Tool
-        template: 
-          src: leofs-adm.j2
-          dest: ./leofs-adm
-          mode: 0755
-        tags: run
-
-      - name: Get LeoFS Package
-        get_url:
-          url: "{{ leofs_package_url }}"
-          dest: ./{{ leofs_package }}
-        tags: run
+  roles:
+      - role: controller
 
 - hosts: leo_manager_0
   roles:
@@ -29,8 +18,7 @@
   tasks:
       - name: Sleep 5 Seconds
         command: sleep 5
-        tags:
-            - run
+        tags: run
 
 - hosts: leo_storage
   roles:
@@ -45,13 +33,11 @@
   tasks:
       - name: Sleep 30 Seconds
         command: sleep 30
-        tags:
-            - run
+        tags: run
 
 - hosts: localhost
   gather_facts: False
   tasks:
       - name: Start LeoFS
         command: ./leofs-adm start
-        tags:
-          - run
+        tags: run

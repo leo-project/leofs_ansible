@@ -1,7 +1,19 @@
 ---
+- name: Include Leofs Package Information
+  include_vars: leofs_releases/{{ leofs_version }}.yml
+  tags: install
+
+- name: Pick Package based on OS
+  include_vars: "{{ item }}"
+  with_first_found:
+      - "package_{{ ansible_distribution }}_{{ansible_distribution_version}}.yml"
+      - "package_{{ ansible_distribution }}_{{ansible_lsb.major_release}}.yml"
+      - "package_{{ ansible_distribution }}.yml"
+      - "package_{{ ansible_os_family }}.yml"
+  tags: install
 
 - name: Copy LeoFS Package
-  copy: src={{ leofs_package }} dest=/tmp/
+  copy: src=/tmp/{{ leofs_package }} dest=/tmp/
   tags:
       - install
 

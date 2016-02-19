@@ -2,6 +2,3 @@
 leo_manager_0_nodename: leo_manager_0@{{ groups['leo_manager_0'][0] }}
 leo_manager_1_nodename: leo_manager_1@{{ groups['leo_manager_1'][0] }}
 leo_managers: "[{{ leo_manager_0_nodename }}, {{ leo_manager_1_nodename }}]"
-
-leofs_package: leofs_1.2.18-1_ubuntu-14.04_amd64.deb 
-leofs_package_url: https://github.com/leo-project/leofs/releases/download/1.2.18/leofs_1.2.18-1_ubuntu-14.04_amd64.deb

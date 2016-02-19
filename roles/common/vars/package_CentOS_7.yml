@@ -1,0 +1,2 @@
+---
+leofs_package: "{{ leofs_packages['rpm_centos_7'].name }}"
