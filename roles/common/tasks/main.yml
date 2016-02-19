@@ -73,3 +73,17 @@
   file: path={{ leofs_install_path }} state=absent
   tags:
       - purge
+
+- name: Purge LeoFS Directories
+  become: True
+  file: 
+      path: "{{ item }}"
+      state: absent
+  with_items:
+      - "{{ leofs_work_dir }}"
+      - "{{ leofs_mnesia_dir }}"
+      - "{{ leofs_queue_dir }}"
+      - "{{ leofs_stack_dir }}"
+      - "{{ leofs_log_dir }}"
+  tags:
+      - purge
