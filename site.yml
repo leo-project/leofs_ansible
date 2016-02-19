@@ -18,7 +18,8 @@
   tasks:
     - name: Wait for LeoMansgers
       pause: seconds=5
-      tags: run
+      tags: 
+          - run
 
 - hosts: leo_storage
   roles:
@@ -33,11 +34,13 @@
   tasks:
     - name: Wait for LeoStorages
       pause: seconds=30
-      tags: run
+      tags: 
+          - run
 
 - hosts: localhost
   gather_facts: False
   tasks:
       - name: Start LeoFS
         command: ./leofs-adm start
-        tags: run
+        tags: 
+            - run

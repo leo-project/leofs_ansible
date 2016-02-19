@@ -4,7 +4,8 @@
     src: leofs-adm.j2
     dest: ./leofs-adm
     mode: 0755
-  tags: config
+  tags: 
+      - config
 
 - name: Include Leofs Package Information
   include_vars: ../../common/vars/leofs_releases/{{ leofs_version }}.yml
@@ -18,4 +19,5 @@
       url: "{{ item.value.url }}"
       dest: "/tmp/{{ item.value.name }}"
   with_dict: "{{ leofs_packages }}"
-  tags: fetch
+  tags: 
+      - fetch
