@@ -1,7 +1,8 @@
 ---
 - name: Include Leofs Package Information
   include_vars: leofs_releases/{{ leofs_version }}.yml
-  tags: install
+  tags: 
+      - install
 
 - name: Pick Package based on OS
   include_vars: "{{ item }}"
@@ -10,17 +11,33 @@
       - "package_{{ ansible_distribution }}_{{ansible_lsb.major_release}}.yml"
       - "package_{{ ansible_distribution }}.yml"
       - "package_{{ ansible_os_family }}.yml"
-  tags: install
+  tags: 
+      - install
+
+- name: Check Cached LeoFS Package (at Controller)
+  local_action: stat path=/tmp/{{ leofs_package }}
+  register: cached_package
+  tags: 
+      - install
 
 - name: Copy LeoFS Package
   copy: src=/tmp/{{ leofs_package }} dest=/tmp/
-  tags:
+  when: cached_package.stat.exists == True
+  tags: 
+      - install
+
+- name: Get LeoFS Package
+  get_url:
+      url: "{{ leofs_package_url }}"
+      dest: "/tmp/{{ leofs_package }}"
+  when: cached_package.stat.exists == False
+  tags: 
       - install
 
 - name: Install LeoFS Package
   become: True
   apt: deb=/tmp/{{ leofs_package }}
-  tags:
+  tags: 
       - install
 
 - name: Prepare Directories

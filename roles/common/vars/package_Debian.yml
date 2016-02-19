@@ -1,2 +1,3 @@
 ---
 leofs_package: "{{ leofs_packages['deb_ubuntu_1404'].name }}"
+leofs_package_url: "{{ leofs_packages['deb_ubuntu_1404'].url }}"
