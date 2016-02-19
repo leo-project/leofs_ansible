@@ -34,9 +34,17 @@
   tags: 
       - install
 
-- name: Install LeoFS Package
+- name: Install LeoFS Package (Debian)
   become: True
-  apt: deb=/tmp/{{ leofs_package }}
+  apt: deb=/tmp/{{ leofs_package }} state=present
+  when: ansible_os_family == 'Debian'
+  tags: 
+      - install
+
+- name: Install LeoFS Package (RedHat)
+  become: True
+  yum: name=/tmp/{{ leofs_package }} state=present
+  when: ansible_os_family == 'RedHat'
   tags: 
       - install
 
@@ -63,7 +71,7 @@
 
 - name: Uninstall LeoFS Package
   become: True
-  apt: name=leofs state=absent
+  package: name=leofs state=absent
   tags:
       - uninstall
       - purge
