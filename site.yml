@@ -16,9 +16,9 @@
 - hosts: localhost
   gather_facts: False
   tasks:
-      - name: Sleep 5 Seconds
-        command: sleep 5
-        tags: run
+    - name: Wait for LeoMansgers
+      pause: seconds=5
+      tags: run
 
 - hosts: leo_storage
   roles:
@@ -31,9 +31,9 @@
 - hosts: localhost
   gather_facts: False
   tasks:
-      - name: Sleep 30 Seconds
-        command: sleep 30
-        tags: run
+    - name: Wait for LeoStorages
+      pause: seconds=30
+      tags: run
 
 - hosts: localhost
   gather_facts: False
