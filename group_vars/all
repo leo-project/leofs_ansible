@@ -1,4 +1,8 @@
 ---
+# 
+# Required: LeoManagers Information
+# Erlang node name format {sname}@{host}
+#
 leo_manager_0_nodename: leo_manager_0@{{ groups['leo_manager_0'][0] }}
 leo_manager_1_nodename: leo_manager_1@{{ groups['leo_manager_1'][0] }}
 leo_managers: "[{{ leo_manager_0_nodename }}, {{ leo_manager_1_nodename }}]"
