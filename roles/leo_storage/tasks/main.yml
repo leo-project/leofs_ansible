@@ -24,6 +24,16 @@
   tags:
       - stop
 
+- name: Purge LeoStorage Data
+  become: True
+  file:
+      path: "{{ item }}"
+      state: absent
+  with_items: 
+      - "{{ leo_storage_container_paths }}" 
+  tags:
+      - purge
+
 - name: Run LeoStorage
   become: True
   command: bin/leo_storage start
