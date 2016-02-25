@@ -45,14 +45,14 @@ managers = {{ leo_managers }}
 ## GATEWAY Protocol
 ## --------------------------------------------------------------------
 ## Gateway Protocol to use: [s3 | rest | embed | nfs]
-protocol = s3
+protocol = {{ leo_gateway_protocol }}
 
 
 ## --------------------------------------------------------------------
 ## GATEWAY - HTTP-related configurations
 ## --------------------------------------------------------------------
 ## Port number the Gateway uses for HTTP connections
-http.port = 8080
+http.port = {{ leo_gateway_http_port }}
 
 ## Numbers of processes listening for connections
 http.num_of_acceptors = 128
@@ -113,19 +113,19 @@ bucket_prop_sync_interval = 300
 ## GATEWAY - Large Object
 ## --------------------------------------------------------------------
 ## Total number of chunked objects
-large_object.max_chunked_objs = 1000
+large_object.max_chunked_objs = {{ leo_gateway_max_chunk }}
 
 ## Length of a chunked object
-large_object.chunked_obj_len = 5242880
+large_object.chunked_obj_len = {{ leo_gateway_chunk_len }}
 
 ## Threshold of length of a chunked object
-large_object.threshold_of_chunk_len = 5767168
+large_object.threshold_of_chunk_len = {{ leo_gateway_chunk_thres }}
 
 ## Reading length of a chuncked object
 ##   * If happening timeout when copying a large object,
 ##     you will solve to set this value as less than 5MB.
 ##   * default: "large_object.chunked_obj_len" (5242880 - 5MB)
-large_object.reading_chunked_obj_len = 5242880
+large_object.reading_chunked_obj_len = {{ leo_gateway_chunk_read_len }}
 
 
 ## --------------------------------------------------------------------
@@ -137,28 +137,28 @@ large_object.reading_chunked_obj_len = 5242880
 ## cache.http_cache = false
 
 ## A number of cache workers
-## cache.cache_workers = 16
+cache.cache_workers = {{ leo_gateway_mcache_workers }}
 
 ## Memory cache capacity in bytes
-cache.cache_ram_capacity = 268435456
+cache.cache_ram_capacity = {{ leo_gateway_mcache_size }}
 
 ## Disk cache capacity in bytes
-cache.cache_disc_capacity = 524288000
+cache.cache_disc_capacity = {{ leo_gateway_dcache_size }}
 
 ## When the length of the object exceeds this value, store the object on disk
-cache.cache_disc_threshold_len = 1048576
+cache.cache_disc_threshold_len = {{ leo_gateway_dcache_thres }}
 
 ## Directory for the disk cache data
-cache.cache_disc_dir_data = ./cache/data
+cache.cache_disc_dir_data = {{ leo_gateway_dcache_path }}
 
 ## Directory for the disk cache journal
-cache.cache_disc_dir_journal = ./cache/journal
+cache.cache_disc_dir_journal = {{ leo_gateway_dcache_journal }}
 
 ## Cache Expire in seconds
-cache.cache_expire = 300
+cache.cache_expire = {{ leo_gateway_cache_expire }}
 
 ## Cache Max Content Length in bytes
-cache.cache_max_content_len = 1048576
+cache.cache_max_content_len = {{ leo_gateway_cache_max_len }}
 
 ## Cache Content Type(s)
 ## In case of "empty", all objects are cached.

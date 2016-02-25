@@ -1,8 +1,26 @@
 ---
+leo_gateway_protocol:       "s3"
+leo_gateway_http_port:      8080
+
+leo_gateway_chunk_len:      5242880
+leo_gateway_chunk_thres:    5767168
+leo_gateway_chunk_read_len: 5242880
+leo_gateway_max_chunk:      1000
+
+leo_gateway_mcache_workers: 16
+leo_gateway_mcache_size:    268435456
+leo_gateway_dcache_size:    524288000
+leo_gateway_dcache_thres:   1048576
+leo_gateway_dcache_path:    "./cache/data"
+leo_gateway_dcache_journal: "./cache/journal"
+leo_gateway_cache_expire:   300
+leo_gateway_cache_max_len:  1048576
+
 leo_gateway_timeout_level_1: 5000
 leo_gateway_timeout_level_2: 7000
 leo_gateway_timeout_level_3: 10000
 leo_gateway_timeout_level_4: 20000
 leo_gateway_timeout_level_5: 30000
-leo_gateway_timeout_get: 30000
-leo_gateway_timeout_ls: 30000
+leo_gateway_timeout_get:    30000
+leo_gateway_timeout_ls:     30000
+
