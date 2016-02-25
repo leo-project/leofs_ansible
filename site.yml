@@ -1,5 +1,6 @@
 ---
 
+## For Fetching Package 
 - hosts: localhost
   gather_facts: False
   roles:
@@ -13,6 +14,7 @@
   roles:
       - role: leo_manager_1
 
+## Wait for LeoManagers Startup
 - hosts: localhost
   gather_facts: False
   tasks:
@@ -29,6 +31,7 @@
   roles:
       - role: leo_gateway
 
+## Wait for LeoStorage Startup
 - hosts: localhost
   gather_facts: False
   tasks:
@@ -37,6 +40,7 @@
       tags: 
           - run
 
+## Start LeoFS
 - hosts: localhost
   gather_facts: False
   tasks:
