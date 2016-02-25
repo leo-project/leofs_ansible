@@ -1,1 +1,5 @@
 ---
+leo_manager_1_port_cui:     10011
+leo_manager_1_port_json:    10021
+
+leo_manager_1_rpc_port:     13076

@@ -41,8 +41,8 @@ sasl.error_logger_mf_dir = {{ leofs_log_dir }}/sasl
 manager.partner = {{ leo_manager_0_nodename }}
 
 ## Manager-console accepatable port number
-console.port.cui  = 10011
-console.port.json = 10021
+console.port.cui  = {{ leo_manager_1_port_cui }}
+console.port.json = {{ leo_manager_1_port_json }}
 
 ## Manager-console's number of acceptors
 console.acceptors.cui = 3
@@ -108,7 +108,7 @@ snmp_agent = ./snmp/snmpa_manager_1/LEO-MANAGER
 rpc.server.acceptors = 16
 
 ## RPC-Server's listening port number
-rpc.server.listen_port = 13076
+rpc.server.listen_port = {{ leo_manager_1_rpc_port }}
 
 ## RPC-Server's listening timeout
 rpc.server.listen_timeout = 5000
