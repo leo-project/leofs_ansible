@@ -1,0 +1,17 @@
+---
+- name: Run LeoStorage
+  command: bin/leo_storage start
+  when: control_leofs is defined and control_leofs == "start"
+  args:
+    chdir: "{{ leofs_module_path }}"
+  tags:
+      - run
+
+- name: Stop LeoStorage
+  command: bin/leo_storage stop
+  when: control_leofs is defined and control_leofs == "stop"
+  args:
+    chdir: "{{ leofs_module_path }}"
+  tags:
+      - stop
+

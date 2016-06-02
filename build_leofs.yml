@@ -1,0 +1,9 @@
+---
+
+## Build LeoFS
+- hosts: builder
+  gather_facts: False
+  vars:
+      build_script: "build_custom.sh"
+  roles:
+    - role: builder

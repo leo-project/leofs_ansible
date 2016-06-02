@@ -1,17 +1,68 @@
 ---
-leofs_log_level: 0
-leofs_access_log: False
-leofs_diagnosis_log: True
-erlang_secio: True
+leofs_sasl_errorlog_type:               "error"
+leofs_sasl_error_logger_mf_maxbytes:    10485760
+leofs_sasl_error_logger_mf_maxfiles:    5
+leofs_sasl_error_log:                   "{{ leofs_log_dir }}/sasl/sasl-error.log"
+leofs_sasl_error_mf_dir:                "{{ leofs_log_dir }}/sasl"
 
-leofs_version: 1.2.18
-leofs_install_path: /usr/local/leofs/{{ leofs_version }}/
-leofs_module_path: "{{ leofs_install_path }}/{{ leofs_module }}/"
+leofs_access_log:       False
+leofs_diagnosis_log:    True
+leofs_cookie:           "401321b4"
+
+leofs_version:          "1.2.22"
+leofs_install_path:     "/usr/local/leofs/{{ leofs_version }}/"
+leofs_module_path:      "{{ leofs_install_path }}/{{ leofs_module }}/"
 leofs_module_conf_path: "{{ leofs_module_path }}/etc/"
-leofs_module_nodename: "{{ leofs_module }}@{{ inventory_hostname }}"
+leofs_module_sname:     "{{ leofs_module }}"
+leofs_module_nodename:  "{{ leofs_module_sname }}@{{ inventory_hostname }}"
 
-leofs_work_dir: "{{ leofs_module_path }}/work"
-leofs_mnesia_dir: "{{ leofs_work_dir }}/mnesia/"
-leofs_queue_dir: "{{ leofs_work_dir }}/queue/"
-leofs_stack_dir: "{{ leofs_work_dir }}/ord_reda/"
-leofs_log_dir: "{{ leofs_module_path }}/log"
+leofs_work_dir:     "{{ leofs_module_path }}/work"
+leofs_mnesia_dir:   "{{ leofs_work_dir }}/mnesia/"
+leofs_queue_dir:    "{{ leofs_work_dir }}/queue/"
+leofs_stack_dir:    "{{ leofs_work_dir }}/ord_reda/"
+
+leofs_watchdog_loosen_control_safe_count:   1
+
+leofs_watchdog_rex_enabled:     True
+leofs_watchdog_rex_interval:    5
+leofs_watchdog_rex_thres_mem:   33554432
+
+leofs_watchdog_cpu_enabled:     True
+leofs_watchdog_cpu_error_times: 3
+leofs_watchdog_cpu_interval:    5
+leofs_watchdog_cpu_thres_load:  5.0
+leofs_watchdog_cpu_thres_util:  100
+
+leofs_log_level:    0
+leofs_log_dir:      "{{ leofs_module_path }}/log"
+leofs_log_erlang:   "{{ leofs_log_dir }}/erlang"
+leofs_log_app:      "{{ leofs_log_dir }}/app"
+leofs_log_member:   "{{ leofs_log_dir }}/ring"
+leofs_log_ring:     "{{ leofs_log_dir }}/ring"
+
+leofs_mnesia_dump_log_write_thres:  50000
+leofs_mnesia_dc_dump_limit:         40
+
+leo_profiler_backend_db:    False
+leo_profiler_logger:        False
+leo_profiler_mq:            False
+leo_profiler_obj_storage:   False
+leo_profiler_ordning_reda:  False
+leo_profiler_redudant:      False
+leo_profiler_rpc:           False
+leo_profiler_stat:          False
+
+erlang_kernel_pool:     True
+erlang_async_threads:   32
+erlang_max_ports:       64000
+erlang_crash_dump:      "{{ leofs_log_dir }}/erl_crash.dump"
+erlang_max_ets_tables:  256000
+erlang_smp:             "enable"
+
+erlang_sched_compact_load:  True
+erlang_sched_utli_balance:  False
+erlang_dist_buffer_size:    32768
+erlang_fullsweep_after:     0
+erlang_secio:               True
+erlang_process_limit:       1048576
+

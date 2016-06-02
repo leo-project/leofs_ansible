@@ -1,0 +1,23 @@
+---
+
+## Purge LeoFS
+- hosts: leo_manager_0
+  name: Purge LeoManager (Primary)
+  roles:
+      - { role: leo_manager_0, do_purge: true }
+
+- hosts: leo_manager_1
+  name: Purge LeoManager (Secondary)
+  roles:
+      - { role: leo_manager_1, do_purge: true }
+
+- hosts: leo_gateway
+  name: Purge LeoGateway
+  roles:
+      - { role: leo_gateway, do_purge: true }
+
+- hosts: leo_storage
+  name: Purge LeoStorage
+  roles:
+      - { role: leo_storage, do_purge: true }
+

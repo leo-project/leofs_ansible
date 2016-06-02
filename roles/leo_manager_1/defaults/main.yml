@@ -1,5 +1,15 @@
 ---
-leo_manager_1_port_cui:     10011
-leo_manager_1_port_json:    10021
+leo_manager_console_cui_port:           10011
+leo_manager_console_json_port:          10021
+leo_manager_console_cui_acceptors:      3
+leo_manager_console_json_acceptors:     16
+leo_manager_console_hist_display_num:   200
 
-leo_manager_1_rpc_port:     13076
+leofs_rpc_server_acceptors:         16
+leofs_rpc_server_port:              13076
+leofs_rpc_server_timeout:           5000
+leofs_rpc_server_conn_pool:         16
+leofs_rpc_server_conn_buffer_size:  16
+
+leofs_snmp_agent:   "./snmp/snmpa_manager_1/LEO-MANAGER"
+leofs_snmp_conf:    "./snmp/snmpa_manager_1/leo_manager_snmp"

@@ -14,25 +14,28 @@
 
 ## SASL error log path
 ## sasl.sasl_error_log = ./log/sasl/sasl-error.log
-sasl.sasl_error_log = {{ leofs_log_dir}}/sasl/sasl-error.log
+sasl.sasl_error_log = {{ leofs_sasl_error_log }}
 
 ## Restricts the error logging performed by the specified sasl_error_logger
 ## to error reports, progress reports, or both.
 ## errlog_type = [error | progress | all]
 ## sasl.errlog_type = error
+sasl.errlog_type = {{ leofs_sasl_errorlog_type }}
 
 ## Specifies in which directory the files are stored.
 ## If this parameter is undefined or false, the error_logger_mf_h is not installed.
 ## sasl.error_logger_mf_dir = ./log/sasl
-sasl.error_logger_mf_dir = {{ leofs_log_dir }}/sasl
+sasl.error_logger_mf_dir = {{ leofs_sasl_error_mf_dir }}
 
 ## Specifies how large each individual file can be.
 ## If this parameter is undefined, the error_logger_mf_h is not installed.
 ## sasl.error_logger_mf_maxbytes = 10485760
+sasl.error_logger_mf_maxbytes = {{ leofs_sasl_error_logger_mf_maxbytes }}
 
 ## Specifies how many files are used.
 ## If this parameter is undefined, the error_logger_mf_h is not installed.
 ## sasl.error_logger_mf_maxfiles = 5
+sasl.error_logger_mf_maxfiles = {{ leofs_sasl_error_logger_mf_maxfiles }}
 
 ## --------------------------------------------------------------------
 ## MANAGER
@@ -41,15 +44,15 @@ sasl.error_logger_mf_dir = {{ leofs_log_dir }}/sasl
 manager.partner = {{ leo_manager_0_nodename }}
 
 ## Manager-console accepatable port number
-console.port.cui  = {{ leo_manager_1_port_cui }}
-console.port.json = {{ leo_manager_1_port_json }}
+console.port.cui  = {{ leo_manager_console_cui_port }}
+console.port.json = {{ leo_manager_console_json_port }}
 
 ## Manager-console's number of acceptors
-console.acceptors.cui = 3
-console.acceptors.json = 16
+console.acceptors.cui = {{ leo_manager_console_cui_acceptors }}
+console.acceptors.json = {{ leo_manager_console_json_acceptors }}
 
 ## # of histories to display at once
-console.histories.num_of_display = 200
+console.histories.num_of_display = {{ leo_manager_console_hist_display_num }} 
 
 ## --------------------------------------------------------------------
 ## MANAGER - Mnesia
@@ -61,10 +64,10 @@ mnesia.dir = {{ leofs_mnesia_dir }}
 
 ## The write threshold for transaction log dumps
 ## as the number of writes to the transaction log
-mnesia.dump_log_write_threshold = 50000
+mnesia.dump_log_write_threshold = {{ leofs_mnesia_dump_log_write_thres }}
 
 ## Controls how often disc_copies tables are dumped from memory
-mnesia.dc_dump_limit = 40
+mnesia.dc_dump_limit = {{ leofs_mnesia_dc_dump_limit }}
 
 
 ## --------------------------------------------------------------------
@@ -75,19 +78,19 @@ log.log_level = {{ leofs_log_level }}
 
 ## Output log file(s) - Erlang's log
 ## log.erlang = ./log/erlang
-log.erlang = {{ leofs_log_dir }}/erlang
+log.erlang = {{ leofs_log_erlang }}
 
 ## Output log file(s) - app
 ## log.app = ./log/app
-log.app = {{ leofs_log_dir }}/app
+log.app = {{ leofs_log_app }}
 
 ## Output log file(s) - members of storage-cluster
 ## log.member_dir = ./log/ring
-log.member_dir = {{ leofs_log_dir }}/ring
+log.member_dir = {{ leofs_log_member }}
 
 ## Output log file(s) - ring
 ## log.ring_dir = ./log/ring
-log.ring_dir = {{ leofs_log_dir }}/ring
+log.ring_dir = {{ leofs_log_ring }}
 
 
 ## --------------------------------------------------------------------
@@ -98,26 +101,26 @@ log.ring_dir = {{ leofs_log_dir }}/ring
 queue_dir = {{ leofs_queue_dir }}
 
 ## Directory of SNMP agent configuration
-snmp_agent = ./snmp/snmpa_manager_1/LEO-MANAGER
+snmp_agent = {{ leofs_snmp_agent }}
 
 
 ## --------------------------------------------------------------------
 ## RPC
 ## --------------------------------------------------------------------
 ## RPC-Server's acceptors
-rpc.server.acceptors = 16
+rpc.server.acceptors = {{ leofs_rpc_server_acceptors }}
 
 ## RPC-Server's listening port number
-rpc.server.listen_port = {{ leo_manager_1_rpc_port }}
+rpc.server.listen_port = {{ leofs_rpc_server_port }}
 
 ## RPC-Server's listening timeout
-rpc.server.listen_timeout = 5000
+rpc.server.listen_timeout = {{ leofs_rpc_server_timeout }}
 
 ## RPC-Client's size of connection pool
-rpc.client.connection_pool_size = 16
+rpc.client.connection_pool_size = {{ leofs_rpc_server_conn_pool }}
 
 ## RPC-Client's size of connection buffer
-rpc.client.connection_buffer_size = 16
+rpc.client.connection_buffer_size = {{ leofs_rpc_server_conn_buffer_size }}
 
 
 ## --------------------------------------------------------------------
@@ -125,18 +128,23 @@ rpc.client.connection_buffer_size = 16
 ## --------------------------------------------------------------------
 ## Enable profiler - leo_backend_db
 ## leo_backend_db.profile = false
+leo_backend_db.profile = {{ leo_profiler_backend_db|lower }}
 
 ## Enable profiler - leo_logger
 ## leo_logger.profile = false
+leo_logger.profile = {{ leo_profiler_logger|lower }}
 
 ## Enable profiler - leo_mq
 ## leo_mq.profile = false
+leo_mq.profile = {{ leo_profiler_mq|lower }}
 
 ## Enable profiler - leo_redundant_manager
 ## leo_redundant_manager.profile = false
+leo_redundant_manager.profile = {{ leo_profiler_redudant|lower }}
 
 ## Enable profiler - leo_statistics
 ## leo_statistics.profile = false
+leo_statistics.profile = {{ leo_profiler_stat|lower }}
 
 
 ##======================================================================
@@ -147,25 +155,29 @@ nodename = {{ leo_manager_1_nodename }}
 
 ## Cookie for distributed node communication.  All nodes in the same cluster
 ## should use the same cookie or they will not be able to communicate.
-distributed_cookie = 401321b4
+distributed_cookie = {{ leofs_cookie }}
 
 ## Enable kernel poll
-erlang.kernel_poll = true
+erlang.kernel_poll = {{ erlang_kernel_pool|lower }}
 
 ## Number of async threads
-erlang.asyc_threads = 32
+erlang.asyc_threads = {{ erlang_async_threads }}
 
 ## Increase number of concurrent ports/sockets
-erlang.max_ports = 64000
+erlang.max_ports = {{ erlang_max_ports }}
 
 ## Set the location of crash dumps
-erlang.crash_dump = {{ leofs_log_dir }}/erl_crash.dump
+erlang.crash_dump = {{ erlang_crash_dump }}
 
 ## Raise the ETS table limit
-erlang.max_ets_tables = 256000
+erlang.max_ets_tables = {{ erlang_max_ets_tables }}
+
+## Enable SMP
+erlang.smp = {{ erlang_smp|lower }}
 
 ## Raise the default erlang process limit
-process_limit = 1048576
+process_limit = {{ erlang_process_limit }}
 
 ## Path of SNMP-agent configuration
 ## snmp_conf = ./snmp/snmpa_manager_1/leo_manager_snmp
+snmp_conf = {{ leofs_snmp_conf }}

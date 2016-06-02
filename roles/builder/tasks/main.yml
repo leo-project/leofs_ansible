@@ -1,0 +1,8 @@
+---
+- name: Clear Build Temp Path
+  run_once: true
+  file: path={{ build_temp_path }} state=absent
+
+- name: Build LeoFS
+  run_once: true
+  script: "{{ build_script}} {{ build_temp_path }}"

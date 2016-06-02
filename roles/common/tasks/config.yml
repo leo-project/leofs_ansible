@@ -1,0 +1,14 @@
+---
+- name: Prepare Directories
+  file: 
+      path: "{{ item }}"
+      state: directory
+  with_items:
+      - "{{ leofs_work_dir }}"
+      - "{{ leofs_mnesia_dir }}"
+      - "{{ leofs_queue_dir }}"
+      - "{{ leofs_stack_dir }}"
+      - "{{ leofs_log_dir }}"
+  tags:
+      - config
+

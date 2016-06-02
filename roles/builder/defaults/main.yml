@@ -1,0 +1,4 @@
+---
+build_temp_path: /tmp/leofs_builder
+build_script: roles/builder/files/build_default.sh 
+

@@ -3,3 +3,68 @@ leo_storage_container_paths:
     - "{{ leofs_module_path }}/avs"
 leo_storage_num_of_containers: 
     - 8
+
+num_vnodes: 168
+
+leo_storage_metadata_storage:       "leveldb"
+leo_storage_strict_check:           False
+leo_storage_thres_slow:             1000
+leo_storage_seek_timeout_per_meta:  10
+leo_storage_max_num_procs:          3000
+leo_storage_num_read_procs:         3
+
+leofs_watchdog_disk_enabled:        False
+leofs_watchdog_disk_error_times:    5
+leofs_watchdog_disk_interval:       1
+leofs_watchdog_disk_thres_use:      85
+leofs_watchdog_disk_thres_util:     90
+leofs_watchdog_disk_thres_rkb:      98304
+leofs_watchdog_disk_thres_wkb:      98304
+leofs_watchdog_disk_target_devices: []
+
+leofs_watchdog_cluster_enabled: False
+leofs_watchdog_cluster_inteval: 10
+
+leofs_watchdog_error_enabled:   False
+leofs_watchdog_error_interval:  60
+leofs_watchdog_error_thres_cnt: 100
+
+leo_storage_auto_compact_enabled:       False
+leo_storage_auto_compact_procs:         1
+leo_storage_auto_compact_interval:      3600
+leo_storage_auto_compact_warn_ratio:    70
+leo_storage_auto_compact_thres_ratio:   60
+
+leo_storage_compact_limit_procs:    4
+leo_storage_compact_wait_time_reg:  500
+leo_storage_compact_wait_time_max:  3000
+leo_storage_compact_batch_reg:      1000
+leo_storage_compact_batch_max:      1500
+
+leo_storage_mq_backend:             "leveldb"
+leo_storage_mq_num_procs:           8
+leo_storage_mq_batch_reg:           1600
+leo_storage_mq_batch_max:           3000
+leo_storage_mq_batch_inteval_reg:   500
+leo_storage_mq_batch_inteval_max:   3000
+
+# leo_storage_rep_rack_id:                
+leo_storage_rep_recovery_stack_size:    33554432
+leo_storage_rep_recovery_stack_timeout: 5
+
+leo_storage_mdc_stack_size:     33554432
+leo_storage_mdc_stack_timeout:  30
+leo_storage_mdc_req_timeout:    30000
+leo_storage_mdc_stack_proc:     1
+
+leo_ordning_reda_send_interval: 100
+
+leofs_rpc_server_acceptors:         128
+leofs_rpc_server_port:              13077
+leofs_rpc_server_timeout:           30000
+leofs_rpc_server_conn_pool:         8
+leofs_rpc_server_conn_buffer_size:  8
+leofs_rpc_server_max_req_reconn:    64
+
+leofs_snmp_agent:   "./snmp/snmpa_storage_0/LEO-STORAGE"
+leofs_snmp_conf:    "./snmp/snmpa_storage_0/leo_storage_snmp"

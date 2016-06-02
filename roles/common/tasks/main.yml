@@ -1,97 +1,21 @@
 ---
-- name: Include Leofs Package Information
-  include_vars: leofs_releases/{{ leofs_version }}.yml
-  tags: 
-      - install
+- name: Include Package Installation Tasks
+  include: install_package.yml
+  when: do_install is defined and do_install and source == "package"
 
-- name: Pick Package based on OS
-  include_vars: "{{ item }}"
-  with_first_found:
-      - "package_{{ ansible_distribution }}_{{ansible_distribution_version}}.yml"
-      - "package_{{ ansible_distribution }}_{{ansible_lsb.major_release}}.yml"
-      - "package_{{ ansible_distribution }}.yml"
-      - "package_{{ ansible_os_family }}.yml"
-  tags: 
-      - install
+- name: Include Build Installation Tasks
+  include: install_build.yml
+  when: do_install is defined and do_install and source == "build"
 
-- name: Check Cached LeoFS Package (at Controller)
-  local_action: stat path=/tmp/{{ leofs_package }}
-  register: cached_package
-  tags: 
-      - install
+- name: Point to Build Package Path
+  set_fact:
+    leofs_install_path: "{{ build_install_path }}/package"
+  when: source == "build"
 
-- name: Copy LeoFS Package
-  copy: src=/tmp/{{ leofs_package }} dest=/tmp/
-  when: cached_package.stat.exists == True
-  tags: 
-      - install
+- name: Include Common Perparation
+  include: config.yml
+  when: do_config is defined and do_config
 
-- name: Get LeoFS Package
-  get_url:
-      url: "{{ leofs_package_url }}"
-      dest: "/tmp/{{ leofs_package }}"
-  when: cached_package.stat.exists == False
-  tags: 
-      - install
-
-- name: Install LeoFS Package (Debian)
-  become: True
-  apt: deb=/tmp/{{ leofs_package }} state=present
-  when: ansible_os_family == 'Debian'
-  tags: 
-      - install
-
-- name: Install LeoFS Package (RedHat)
-  become: True
-  yum: name=/tmp/{{ leofs_package }} state=present
-  when: ansible_os_family == 'RedHat'
-  tags: 
-      - install
-
-- name: Prepare Directories
-  become: True
-  file: 
-      path: "{{ item }}"
-      state: directory
-  with_items:
-      - "{{ leofs_work_dir }}"
-      - "{{ leofs_mnesia_dir }}"
-      - "{{ leofs_queue_dir }}"
-      - "{{ leofs_stack_dir }}"
-      - "{{ leofs_log_dir }}"
-  tags:
-      - config
-
-- name: Force Stop
-  become: True
-  command: pkill beam.smp 
-  ignore_errors: True
-  tags:
-      - killbeam
-
-- name: Uninstall LeoFS Package
-  become: True
-  package: name=leofs state=absent
-  tags:
-      - uninstall
-      - purge
-
-- name: Purge LeoFS
-  become: True
-  file: path={{ leofs_install_path }} state=absent
-  tags:
-      - purge
-
-- name: Purge LeoFS Directories
-  become: True
-  file: 
-      path: "{{ item }}"
-      state: absent
-  with_items:
-      - "{{ leofs_work_dir }}"
-      - "{{ leofs_mnesia_dir }}"
-      - "{{ leofs_queue_dir }}"
-      - "{{ leofs_stack_dir }}"
-      - "{{ leofs_log_dir }}"
-  tags:
-      - purge
+- name: Include Common Purge Instructions
+  include: purge.yml
+  when: do_purge is defined and do_purge
