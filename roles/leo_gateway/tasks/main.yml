@@ -1,5 +1,5 @@
 ---
-- name: Create the LeoStorage Configuration File
+- name: Create the LeoGateway Configuration File
   template: src=leo_gateway.conf.j2 dest={{ leofs_module_conf_path }}/leo_gateway.conf
   when: do_purge is undefined or do_purge == false
   tags:

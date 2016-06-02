@@ -14,32 +14,34 @@
 
 ## SASL error log path
 ## sasl.sasl_error_log = ./log/sasl/sasl-error.log
-sasl.sasl_error_log = {{ leofs_log_dir}}/sasl/sasl-error.log
+sasl.sasl_error_log = {{ leofs_sasl_error_log }}
 
 ## Restricts the error logging performed by the specified sasl_error_logger
 ## to error reports, progress reports, or both.
 ## errlog_type = [error | progress | all]
 ## sasl.errlog_type = error
+sasl.errlog_type = {{ leofs_sasl_errorlog_type }}
 
 ## Specifies in which directory the files are stored.
 ## If this parameter is undefined or false, the error_logger_mf_h is not installed.
 ## sasl.error_logger_mf_dir = ./log/sasl
-sasl.error_logger_mf_dir = {{ leofs_log_dir }}/sasl
+sasl.error_logger_mf_dir = {{ leofs_sasl_error_mf_dir }}
 
 ## Specifies how large each individual file can be.
 ## If this parameter is undefined, the error_logger_mf_h is not installed.
 ## sasl.error_logger_mf_maxbytes = 10485760
+sasl.error_logger_mf_maxbytes = {{ leofs_sasl_error_logger_mf_maxbytes }}
 
 ## Specifies how many files are used.
 ## If this parameter is undefined, the error_logger_mf_h is not installed.
 ## sasl.error_logger_mf_maxfiles = 5
+sasl.error_logger_mf_maxfiles = {{ leofs_sasl_error_logger_mf_maxfiles }}
 
 ## --------------------------------------------------------------------
 ## Manager's Node(s)
 ## --------------------------------------------------------------------
 ## Name of Manager node(s)
 managers = {{ leo_managers }}
-
 
 ## --------------------------------------------------------------------
 ## GATEWAY Protocol
@@ -52,40 +54,51 @@ protocol = {{ leo_gateway_protocol }}
 ## GATEWAY - HTTP-related configurations
 ## --------------------------------------------------------------------
 ## Port number the Gateway uses for HTTP connections
+## http.port = 8080
 http.port = {{ leo_gateway_http_port }}
 
 ## Numbers of processes listening for connections
-http.num_of_acceptors = 128
+## http.num_of_acceptors = 128
+http.num_of_acceptors = {{ leo_gateway_http_acceptors }}
 
 ## Maximum number of requests allowed in a single keep-alive session
-http.max_keepalive = 4096
+#http.max_keepalive = 4096
+http.max_keepalive = {{ leo_gateway_http_keepalive }}
 
 ## Maximum number of virtual directories
 ## http.layer_of_dirs = 12
+http.layer_of_dirs = {{ leo_gateway_http_layer_of_dirs }}
 
 ## Port number the Gateway uses for HTTPS connections
 ## http.ssl_port = 8443
+http.ssl_port = {{ leo_gateway_http_ssl_port }}
 
 ## SSL Certificate file
 ## http.ssl_certfile = ./etc/server_cert.pem
+http.ssl_certfile = {{ leo_gateway_http_ssl_certfile }}
 
 ## SSL key
 ## http.ssl_keyfile = ./etc/server_key.pem
+http.ssl_keyfile = {{ leo_gateway_http_ssl_keyfile }}
 
 ## HTTP custom header configuration file path
 ## http.headers_config_file = ./etc/http_custom_header.conf
+http.headers_config_file = {{ leo_gateway_http_headers_config_file }}
 
 ## HTTP timeout for reading header
 ## http.timeout_for_header = 5000
+http.timeout_for_header = {{ leo_gateway_http_timeout_for_header }}
 
 ## HTTP timeout for reading body
 ## http.timeout_for_body = 15000
+http.timeout_for_body = {{ leo_gateway_http_timeout_for_body }}
 
 ## HTTP sending chunk length
 ## http.sending_chunked_obj_len = 5242880
+http.sending_chunked_obj_len = {{ leo_gateway_http_sending_chunked_obj_len }}
 
 ## Synchronized time of a bucket property (second)
-bucket_prop_sync_interval = 300
+bucket_prop_sync_interval = {{ leo_gateway_bucket_prop_sync_interval }}
 
 
 ## --------------------------------------------------------------------
@@ -93,15 +106,19 @@ bucket_prop_sync_interval = 300
 ## --------------------------------------------------------------------
 ## Mountd's port number
 ## nfs.mountd.port = 22050
+nfs.mountd.port = {{ leo_gateway_nfs_mountd_port }}
 
 ## Mountd's the number of acceptors
 ## nfs.mountd.acceptors = 128
+nfs.mountd.acceptors = {{ leo_gateway_nfs_mountd_acceptors }}
 
 ## NFSd's port number
 ## nfs.nfsd.port = 2049
+nfs.nfsd.port = {{ leo_gateway_nfs_nfsd_port }}
 
 ## NFSd's the number of acceptors
 ## nfs.nfsd.acceptors = 128
+nfs.nfsd.acceptors = {{ leo_gateway_nfs_nfsd_acceptors }}
 
 ## --------------------------------------------------------------------
 ## GATEWAY - NLM-related configurations
@@ -137,6 +154,7 @@ large_object.reading_chunked_obj_len = {{ leo_gateway_chunk_read_len }}
 ## cache.http_cache = false
 
 ## A number of cache workers
+## cache.cache_workers = 16
 cache.cache_workers = {{ leo_gateway_mcache_workers }}
 
 ## Memory cache capacity in bytes
@@ -146,6 +164,7 @@ cache.cache_ram_capacity = {{ leo_gateway_mcache_size }}
 cache.cache_disc_capacity = {{ leo_gateway_dcache_size }}
 
 ## When the length of the object exceeds this value, store the object on disk
+## cache.cache_disc_threshold_len = 1048576
 cache.cache_disc_threshold_len = {{ leo_gateway_dcache_thres }}
 
 ## Directory for the disk cache data
@@ -154,38 +173,50 @@ cache.cache_disc_dir_data = {{ leo_gateway_dcache_path }}
 ## Directory for the disk cache journal
 cache.cache_disc_dir_journal = {{ leo_gateway_dcache_journal }}
 
-## Cache Expire in seconds
-cache.cache_expire = {{ leo_gateway_cache_expire }}
 
-## Cache Max Content Length in bytes
-cache.cache_max_content_len = {{ leo_gateway_cache_max_len }}
+##
+## For the http-cache configurations
+##
+## Cache Expire in seconds (http-cache)
+cache.cache_expire = {{ leo_gateway_http_cache_expire }}
+
+## Cache Max Content Length in bytes (http-cache)
+cache.cache_max_content_len = {{ leo_gateway_http_cache_max_len }}
 
 ## Cache Content Type(s)
-## In case of "empty", all objects are cached.
+## In case of "empty", all objects are cached (http-cache)
 ## cache.cachable_content_type =
+{% if leo_gateway_http_cache_cachable_type is defined %}
+cache.cachable_content_type = {{ leo_gateway_http_cache_cachable_type }}
+{% endif %}
 
 ## Cache Path Pattern(s) (regular expression)
-## In case of "empty", all objects are cached.
+## In case of "empty", all objects are cached (http-cache)
 ## cache.cachable_path_pattern =
+{% if leo_gateway_http_cache_cachable_path_pattern is defined %}
+cache.cachable_path_pattern = {{ leo_gateway_http_cache_cachable_path_pattern }}
+{% endif %}
 
 
 ## --------------------------------------------------------------------
 ## GATEWAY - Watchdog
 ## --------------------------------------------------------------------
 ## When reach a number of safe (clear watchdog), a watchdog loosen the control
-watchdog.common.loosen_control_at_safe_count = 1
+watchdog.common.loosen_control_at_safe_count = {{ leofs_watchdog_loosen_control_safe_count }}
 
 ##
 ##  Watchdog.REX(RPC)
 ##
 ## Is rex -watchdog enabled - default:false
 ## watchdog.rex.is_enabled = true
+watchdog.rex.is_enabled = {{ leofs_watchdog_rex_enabled|lower }}
 
 ## rex - watch interval - default:5sec
 ## watchdog.rex.interval = 5
+watchdog.rex.interval = {{ leofs_watchdog_rex_interval }}
 
 ## Threshold memory capacity of binary for rex(rpc) - default:32MB
-watchdog.rex.threshold_mem_capacity = 33554432
+watchdog.rex.threshold_mem_capacity = {{ leofs_watchdog_rex_thres_mem }}
 
 
 ##
@@ -193,34 +224,23 @@ watchdog.rex.threshold_mem_capacity = 33554432
 ##
 ## Is cpu-watchdog enabled - default:false
 ## watchdog.cpu.is_enabled = true
+watchdog.cpu.is_enabled = {{ leofs_watchdog_cpu_enabled|lower }}
 
 ## cpu - raised error times
 ## watchdog.cpu.raised_error_times = 3
+watchdog.cpu.raised_error_times = {{ leofs_watchdog_cpu_error_times }}
 
 ## cpu - watch interval - default:5sec
 ## watchdog.cpu.interval = 5
+watchdog.cpu.interval = {{ leofs_watchdog_cpu_interval }}
 
 ## Threshold CPU load avg for 1min/5min - default:5.0
 ## watchdog.cpu.threshold_cpu_load_avg = 5.0
+watchdog.cpu.threshold_cpu_load_avg = {{ leofs_watchdog_cpu_thres_load }}
 
 ## Threshold CPU load util - default:100 = "100%"
 ## watchdog.cpu.threshold_cpu_util = 100
-
-
-##
-##  Watchdog.Erlang IO
-##
-## Is io-watchdog enabled - default:false
-## watchdog.io.is_enabled = true
-
-## io - watch interval - default:1sec
-## watchdog.io.interval = 1
-
-## Threshold input size/sec  - default:128MB/sec
-## watchdog.io.threshold_input_per_sec = 134217728
-
-## Threshold output size/sec - default:128MB/sec
-## watchdog.io.threshold_output_per_sec = 134217728
+watchdog.cpu.threshold_cpu_util = {{ leofs_watchdog_cpu_thres_util }}
 
 
 ## --------------------------------------------------------------------
@@ -228,24 +248,31 @@ watchdog.rex.threshold_mem_capacity = 33554432
 ## --------------------------------------------------------------------
 ## Timeout value when requesting to a storage
 ## 0 to 65,535 bytes
+## timeout.level_1 = 5000
 timeout.level_1 = {{ leo_gateway_timeout_level_1 }}
 
 ## 65,535 to 131,071 bytes
+## timeout.level_2 = 7000
 timeout.level_2 = {{ leo_gateway_timeout_level_2 }}
 
 ## 131,072 to 524,287 bytes
+## timeout.level_3 = 10000
 timeout.level_3 = {{ leo_gateway_timeout_level_3 }}
 
 ## 524,288 to 1,048,576 bytes
+## timeout.level_4 = 20000
 timeout.level_4 = {{ leo_gateway_timeout_level_4 }}
 
 ## 1,048,576 bytes and over
+## timeout.level_5 = 30000
 timeout.level_5 = {{ leo_gateway_timeout_level_5 }}
 
 ## Timeout value when requesting a GET to a storage
+## timeout.get = 30000
 timeout.get = {{ leo_gateway_timeout_get }}
 
 ## Timeout value when requesting a LS(find_by_parent_dir) to a storage
+## timeout.ls = 30000
 timeout.ls = {{ leo_gateway_timeout_ls }}
 
 
@@ -254,6 +281,7 @@ timeout.ls = {{ leo_gateway_timeout_ls }}
 ## --------------------------------------------------------------------
 ##
 ## Log level: [0:debug, 1:info, 2:warn, 3:error]
+## log.log_level = 1
 log.log_level = {{ leofs_log_level }}
 
 ## Is enable access-log [true, false]
@@ -262,19 +290,19 @@ log.is_enable_access_log = {{ leofs_access_log | lower }}
 
 ## Output log file(s) - Erlang's log
 ## log.erlang = ./log/erlang
-log.erlang = {{ leofs_log_dir }}/erlang
+log.erlang = {{ leofs_log_erlang }}
 
 ## Output log file(s) - app
 ## log.app = ./log/app
-log.app = {{ leofs_log_dir }}/app
+log.app = {{ leofs_log_app }}
 
 ## Output log file(s) - members of storage-cluster
 ## log.member_dir = ./log/ring
-log.member_dir = {{ leofs_log_dir }}/ring
+log.member_dir = {{ leofs_log_member }}
 
 ## Output log file(s) - ring
 ## log.ring_dir = ./log/ring
-log.ring_dir = {{ leofs_log_dir }}/ring
+log.ring_dir = {{ leofs_log_ring }}
 
 ## --------------------------------------------------------------------
 ## GATEWAY - Other Directories
@@ -285,6 +313,7 @@ queue_dir = {{ leofs_queue_dir }}
 
 ## Directory of SNMP agent configuration
 ## snmp_agent = ./snmp/snmpa_gateway_0/LEO-GATEWAY
+snmp_agent = {{ leofs_snmp_agent }}
 
 
 ## --------------------------------------------------------------------
@@ -292,31 +321,39 @@ queue_dir = {{ leofs_queue_dir }}
 ## --------------------------------------------------------------------
 ## Enable QoS for statistics
 ## qos.stat.is_enable = false
+qos.stat.is_enable = {{ leo_gateway_qos_stat_enabled|lower }}
 
 ## Enable QoS for notification
 ## qos.notify.is_enable = false
+qos.notify.is_enable = {{ leo_gateway_qos_notify_enabled|lower }}
 
 ## Savanna Manager's nodes
 ## qos.managers = [savanna_manager_0@127.0.0.1, savanna_manager_1@127.0.0.1]
+qos.managers = [{{ leo_gateway_qos_managers|join(",") }}]
 
 
 ## --------------------------------------------------------------------
-## Other Libs
+## Profiling
 ## --------------------------------------------------------------------
 ## Enable profiler - leo_backend_db
 ## leo_backend_db.profile = false
+leo_backend_db.profile = {{ leo_profiler_backend_db|lower }}
 
 ## Enable profiler - leo_logger
 ## leo_logger.profile = false
+leo_logger.profile = {{ leo_profiler_logger|lower }}
 
 ## Enable profiler - leo_mq
 ## leo_mq.profile = false
+leo_mq.profile = {{ leo_profiler_mq|lower }}
 
 ## Enable profiler - leo_redundant_manager
 ## leo_redundant_manager.profile = false
+leo_redundant_manager.profile = {{ leo_profiler_redudant|lower }}
 
 ## Enable profiler - leo_statistics
 ## leo_statistics.profile = false
+leo_statistics.profile = {{ leo_profiler_stat|lower }}
 
 
 ##======================================================================
@@ -327,46 +364,47 @@ nodename = {{ leofs_module_nodename }}
 
 ## Cookie for distributed node communication.  All nodes in the same cluster
 ## should use the same cookie or they will not be able to communicate.
-distributed_cookie = 401321b4
+distributed_cookie = {{ leofs_cookie }}
 
 ## Enable kernel poll
-erlang.kernel_poll = true
+erlang.kernel_poll = {{ erlang_kernel_pool|lower }}
 
 ## Number of async threads
-erlang.asyc_threads = 32
+erlang.asyc_threads = {{ erlang_async_threads }}
 
 ## Increase number of concurrent ports/sockets
-erlang.max_ports = 64000
+erlang.max_ports = {{ erlang_max_ports }}
 
 ## Set the location of crash dumps
-erlang.crash_dump = {{ leofs_log_dir }}/erl_crash.dump
+erlang.crash_dump = {{ erlang_crash_dump }}
 
 ## Raise the ETS table limit
-erlang.max_ets_tables = 256000
+erlang.max_ets_tables = {{ erlang_max_ets_tables }}
 
 ## Enable SMP
-erlang.smp = enable
+erlang.smp = {{ erlang_smp|lower }}
 
 ## Erlang scheduler's compaction of load
-erlang.schedulers.compaction_of_load = true
+erlang.schedulers.compaction_of_load = {{ erlang_sched_compact_load|lower }}
 
 ## Erlang scheduler's balancing of load
-erlang.schedulers.utilization_balancing = false
+erlang.schedulers.utilization_balancing = {{ erlang_sched_utli_balance|lower }}
 
 ## Sender-side network distribution buffer size
 ## - default 32MB (32768KB)
-erlang.distribution_buffer_size = 32768
+erlang.distribution_buffer_size = {{ erlang_dist_buffer_size }}
 
 ## A non-negative integer which indicates
 ## how many times generational garbage collections
 ## can be done without forcing a fullsweep collection
-erlang.fullsweep_after = 0
+erlang.fullsweep_after = {{ erlang_fullsweep_after }}
 
-## Enable eager check I/O
+## Enable/Disable eager check I/O (Erlang 17.4/erts-6.3-, ref:OTP-12117)
 erlang.secio = {{ erlang_secio|lower }}
 
 ## Raise the default erlang process limit
-process_limit = 1048576
+process_limit = {{ erlang_process_limit }}
 
 ## Path of SNMP-agent configuration
 ## snmp_conf = ./snmp/snmpa_gateway_0/leo_gateway_snmp
+snmp_conf = {{ leofs_snmp_conf }}

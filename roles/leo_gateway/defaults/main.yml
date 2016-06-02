@@ -1,6 +1,24 @@
 ---
 leo_gateway_protocol:       "s3"
+
 leo_gateway_http_port:      8080
+leo_gateway_http_acceptors: 128 
+leo_gateway_http_keepalive: 4096
+leo_gateway_http_layer_of_dirs: 12
+leo_gateway_http_ssl_port:  8443
+leo_gateway_http_ssl_certfile:  "./etc/server_cert.pem"
+leo_gateway_http_ssl_keyfile:   "./etc/server_key.pem"
+leo_gateway_http_headers_config_file:   "./etc/http_custom_header.conf"
+leo_gateway_http_timeout_for_header:    5000
+leo_gateway_http_timeout_for_body:      15000
+leo_gateway_http_sending_chunked_obj_len:   5242880
+
+leo_gateway_bucket_prop_sync_interval:  300
+
+leo_gateway_nfs_mountd_port:    22050
+leo_gateway_nfs_mountd_acceptors:   128
+leo_gateway_nfs_nfsd_port:  2049
+leo_gateway_nfs_nfsd_acceptors: 128
 
 leo_gateway_chunk_len:      5242880
 leo_gateway_chunk_thres:    5767168
@@ -13,14 +31,24 @@ leo_gateway_dcache_size:    524288000
 leo_gateway_dcache_thres:   1048576
 leo_gateway_dcache_path:    "./cache/data"
 leo_gateway_dcache_journal: "./cache/journal"
-leo_gateway_cache_expire:   300
-leo_gateway_cache_max_len:  1048576
+leo_gateway_http_cache_expire:   300
+leo_gateway_http_cache_max_len:  1048576
+# leo_gateway_http_cache_cachable_type:   
+# leo_gateway_http_cache_cachable_path_pattern:   
 
-leo_gateway_timeout_level_1: 5000
-leo_gateway_timeout_level_2: 7000
-leo_gateway_timeout_level_3: 10000
-leo_gateway_timeout_level_4: 20000
-leo_gateway_timeout_level_5: 30000
+leo_gateway_timeout_level_1:    5000
+leo_gateway_timeout_level_2:    7000
+leo_gateway_timeout_level_3:    10000
+leo_gateway_timeout_level_4:    20000
+leo_gateway_timeout_level_5:    30000
 leo_gateway_timeout_get:    30000
 leo_gateway_timeout_ls:     30000
 
+leo_gateway_qos_stat_enabled:   False
+leo_gateway_qos_notify_enabled: False
+leo_gateway_qos_managers:
+    - "savanna_manager_0@127.0.0.1"
+    - "savanna_manager_1@127.0.0.1"
+
+leofs_snmp_agent:   "./snmp/snmpa_gateway_0/LEO-GATEWAY"
+leofs_snmp_conf:    "./snmp/snmpa_gateway_0/leo_gateway_snmp"
