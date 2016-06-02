@@ -1,0 +1,9 @@
+---
+- name: Install LeoFS From Built package
+  synchronize: 
+    src: "{{ build_temp_path }}/package"
+    dest: "{{ build_install_path }}"
+  delegate_to: "{{ build_host }}"
+  tags:
+    - install
+

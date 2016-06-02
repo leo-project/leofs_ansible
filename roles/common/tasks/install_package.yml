@@ -1,0 +1,30 @@
+---
+- name: Pick package based on OS
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "package_{{ ansible_distribution }}_{{ansible_distribution_version}}.yml"
+    - "package_{{ ansible_distribution }}_{{ansible_lsb.major_release}}.yml"
+    - "package_{{ ansible_distribution }}.yml"
+    - "package_{{ ansible_os_family }}.yml"
+  tags: 
+    - install
+
+- name: Get LeoFS package
+  get_url:
+    url: "{{ leofs_package_url }}"
+    dest: "/tmp/{{ leofs_package }}"
+  tags: 
+    - install
+
+- name: Install LeoFS package (Debian)
+  apt: deb=/tmp/{{ leofs_package }} state=present
+  when: ansible_os_family == 'Debian'
+  tags: 
+    - install
+
+- name: Install LeoFS package (RedHat)
+  yum: name=/tmp/{{ leofs_package }} state=present
+  when: ansible_os_family == 'RedHat'
+  tags: 
+    - install
+

@@ -1,3 +1,3 @@
 ---
-leofs_package: "{{ leofs_packages['rpm_centos_7'].name }}"
-leofs_package_url: "{{ leofs_packages['rpm_centos_7'].url }}"
+leofs_package: "leofs-{{ leofs_version }}-1.el7.x86_64.rpm"
+leofs_package_url: "https://github.com/leo-project/leofs/releases/download/{{ leofs_version }}/leofs-{{ leofs_version }}-1.el7.x86_64.rpm"

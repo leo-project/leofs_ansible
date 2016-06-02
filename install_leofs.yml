@@ -1,0 +1,15 @@
+---
+
+## Install from Package
+- hosts: leofs_nodes
+  name: Install LeoFS From Package
+  roles:
+      - { role: common, do_install: true }
+
+### Install from Built Source
+#- hosts: leofs_nodes
+#  name: Install LeoFS From Source
+#  serial: 1
+#  roles:
+#      - { role: common, do_install: true }
+

@@ -1,0 +1,27 @@
+---
+- name: Purge LeoFS Directories
+  file: 
+      path: "{{ item }}"
+      state: absent
+  with_items:
+      - "{{ leofs_work_dir }}"
+      - "{{ leofs_mnesia_dir }}"
+      - "{{ leofs_queue_dir }}"
+      - "{{ leofs_stack_dir }}"
+      - "{{ leofs_log_dir }}"
+  tags:
+      - purge
+
+- name: Purge LeoFS
+  file: path={{ leofs_install_path }} state=absent
+  when: source == "build"
+  tags:
+      - purge
+
+- name: Uninstall LeoFS Package
+  package: name=leofs state=absent
+  when: source == "package"
+  tags:
+      - uninstall
+      - purge
+

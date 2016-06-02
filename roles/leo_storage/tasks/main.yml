@@ -1,43 +1,20 @@
 ---
-
 - name: Prepare Container Directories for LeoStorage
-  become: True
   file:
       path: "{{ item }}"
       state: directory
   with_items: 
       - "{{ leo_storage_container_paths }}" 
+  when: control_leofs is undefined and do_purge is undefined
   tags:
       - config
 
 - name: Create the LeoStorage Configuration File
-  become: True
   template: src=leo_storage.conf.j2 dest={{ leofs_module_conf_path }}/leo_storage.conf
+  when: do_purge is undefined or do_purge == false
   tags:
       - config
 
-- name: Stop LeoStorage
-  become: True
-  command: bin/leo_storage stop
-  args:
-    chdir: "{{ leofs_module_path }}"
-  tags:
-      - stop
-
-- name: Purge LeoStorage Data
-  become: True
-  file:
-      path: "{{ item }}"
-      state: absent
-  with_items: 
-      - "{{ leo_storage_container_paths }}" 
-  tags:
-      - purge
-
-- name: Run LeoStorage
-  become: True
-  command: bin/leo_storage start
-  args:
-    chdir: "{{ leofs_module_path }}"
-  tags:
-      - run
+- name: Include Control Tasks
+  include: control.yml
+  when: control_leofs is defined

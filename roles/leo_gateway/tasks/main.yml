@@ -1,23 +1,10 @@
 ---
-
 - name: Create the LeoStorage Configuration File
-  become: True
   template: src=leo_gateway.conf.j2 dest={{ leofs_module_conf_path }}/leo_gateway.conf
+  when: do_purge is undefined or do_purge == false
   tags:
       - config
 
-- name: Stop LeoGateway
-  become: True
-  command: bin/leo_gateway stop
-  args:
-    chdir: "{{ leofs_module_path }}"
-  tags:
-      - stop
-
-- name: Run LeoGateway
-  become: True
-  command: bin/leo_gateway start
-  args:
-    chdir: "{{ leofs_module_path }}"
-  tags:
-      - run
+- name: Include Control Tasks
+  include: control.yml
+  when: control_leofs is defined

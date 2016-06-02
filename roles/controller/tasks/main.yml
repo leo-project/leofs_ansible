@@ -6,18 +6,3 @@
     mode: 0755
   tags: 
       - config
-
-- name: Include Leofs Package Information
-  include_vars: ../../common/vars/leofs_releases/{{ leofs_version }}.yml
-  when: leofs_packages is not defined
-  tags: 
-      - fetch
-      - install
-
-- name: Get LeoFS Package
-  get_url:
-      url: "{{ item.value.url }}"
-      dest: "/tmp/{{ item.value.name }}"
-  with_dict: "{{ leofs_packages }}"
-  tags: 
-      - fetch
