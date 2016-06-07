@@ -76,6 +76,15 @@ If you do not include LeoManagers in inventory, you need to explicitly set the v
 ### Configurable Parameters
 Please check the `defaults/main.yml` for configurable parameters and explainations at `templates/*.conf` in each role
 
+### Custom Build Script
+Build scripts have to include/install necessary libraries for building LeoFS, such as Erlang, refer to [https://github.com/leo-project/leofs](https://github.com/leo-project/leofs)
+
+Build scripts are called with an argument indicating the temporary build path
+```bash
+$ [Build Script] [Temporary Build Path]
+$ build_custom.sh /tmp/leofs_builder
+```
+
 ## Roles
 - builder
   * Builder for LeoFS
