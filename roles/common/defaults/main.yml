@@ -5,8 +5,6 @@ leofs_sasl_error_logger_mf_maxfiles:    5
 leofs_sasl_error_log:                   "{{ leofs_log_dir }}/sasl/sasl-error.log"
 leofs_sasl_error_mf_dir:                "{{ leofs_log_dir }}/sasl"
 
-leofs_access_log:       False
-leofs_diagnosis_log:    True
 leofs_cookie:           "401321b4"
 
 leofs_version:          "1.2.22"

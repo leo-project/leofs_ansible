@@ -66,5 +66,7 @@ leofs_rpc_server_conn_pool:         8
 leofs_rpc_server_conn_buffer_size:  8
 leofs_rpc_server_max_req_reconn:    64
 
+leofs_diagnosis_log:    True
+
 leofs_snmp_agent:   "./snmp/snmpa_storage_0/LEO-STORAGE"
 leofs_snmp_conf:    "./snmp/snmpa_storage_0/leo_storage_snmp"
