@@ -2,21 +2,21 @@
 
 ## Stop LeoFS
 - hosts: leo_manager_0
-  name: Start LeoManager (Primary)
+  name: Stop LeoManager (Primary)
   roles:
       - { role: leo_manager_0, control_leofs: "stop" }
 
 - hosts: leo_manager_1
-  name: Start LeoManager (Secondary)
+  name: Stop LeoManager (Secondary)
   roles:
       - { role: leo_manager_1, control_leofs: "stop" }
 
 - hosts: leo_storage
-  name: Start LeoStorages
+  name: Stop LeoStorages
   roles:
       - { role: leo_storage, control_leofs: "stop" }
 
 - hosts: leo_gateway
-  name: Start LeoGateway
+  name: Stop LeoGateway
   roles:
       - { role: leo_gateway, control_leofs: "stop" }
