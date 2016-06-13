@@ -1,0 +1,25 @@
+---
+
+## Start LeoFS
+- hosts: localhost
+  gather_facts: False
+  name: Config Admin Tool
+  roles:
+      - { role: controller }
+
+- hosts: leo_storage
+  name: Start LeoStorages
+  roles:
+      - { role: leo_storage, control_leofs: "start" }
+
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Wait for LeoStorages
+      pause: seconds=30
+
+- hosts: localhost
+  gather_facts: False
+  tasks:
+      - name: Rebalance Node
+        command: ./leofs-adm rebalance

@@ -62,6 +62,9 @@ Alternatively, you can supply a custom build script
 
 You may need to use the `-b` option to escalate your permission when install with package
 
+## Other Usages
+Refer to examples for playbook/inventory files to perform various operations on LeoFS Cluster
+
 ## Configurations
 ### Important Configurations
 **LeoManagers**
