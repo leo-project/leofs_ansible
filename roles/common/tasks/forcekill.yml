@@ -1,0 +1,6 @@
+---
+- name: Force Kill beam.smp
+  command: pkill beam.smp
+  ignore_errors: True
+  tags:
+      - forcekill

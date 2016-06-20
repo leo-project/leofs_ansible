@@ -16,6 +16,10 @@
   include: config.yml
   when: do_config is defined and do_config
 
+- name: Include Common Force Kill (beam.smp)
+  include: forcekill.yml
+  when: do_forcekill is defined and do_forcekill
+
 - name: Include Common Purge Instructions
   include: purge.yml
   when: do_purge is defined and do_purge
