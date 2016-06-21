@@ -3,20 +3,24 @@
 ## Stop LeoFS
 - hosts: leo_manager_0
   name: Stop LeoManager (Primary)
+  ignore_errors: True
   roles:
       - { role: leo_manager_0, control_leofs: "stop" }
 
 - hosts: leo_manager_1
   name: Stop LeoManager (Secondary)
+  ignore_errors: True
   roles:
       - { role: leo_manager_1, control_leofs: "stop" }
 
 - hosts: leo_storage
   name: Stop LeoStorages
+  ignore_errors: True
   roles:
       - { role: leo_storage, control_leofs: "stop" }
 
 - hosts: leo_gateway
   name: Stop LeoGateway
+  ignore_errors: True
   roles:
       - { role: leo_gateway, control_leofs: "stop" }
