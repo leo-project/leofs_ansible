@@ -1,4 +1,6 @@
 ---
+leofs_module:   leo_gateway
+
 leo_gateway_protocol:       "s3"
 
 leo_gateway_http_port:      8080

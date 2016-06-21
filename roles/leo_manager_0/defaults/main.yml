@@ -1,4 +1,6 @@
 ---
+leofs_module:   leo_manager_0
+
 leo_manager_console_cui_port:           10010
 leo_manager_console_json_port:          10020
 leo_manager_console_cui_acceptors:      3
