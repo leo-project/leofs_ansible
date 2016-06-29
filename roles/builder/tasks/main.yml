@@ -3,6 +3,12 @@
   run_once: true
   file: path={{ build_temp_path }} state=absent
 
-- name: Build LeoFS
+- name: Build LeoFS (Master Branch)
   run_once: true
   script: "{{ build_script}} {{ build_temp_path }}"
+  when: build_branch is undefined
+
+- name: Build LeoFS (Selected Branch)
+  run_once: true
+  script: "{{ build_script}} {{ build_temp_path }} {{ build_branch }}"
+  when: build_branch is defined
