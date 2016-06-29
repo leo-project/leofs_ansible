@@ -18,3 +18,7 @@
 - name: Include Control Tasks
   include: control.yml
   when: control_leofs is defined
+
+- name: Include Purge Instructions
+  include: purge.yml
+  when: do_purge is defined and do_purge
