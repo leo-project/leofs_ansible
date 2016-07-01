@@ -1,7 +1,7 @@
 ---
 - name: Create the LeoManager (Primary) Configuration File
   template: src=leo_manager_0.conf.j2 dest={{ leofs_module_conf_path }}/leo_manager.conf
-  when: do_purge is undefined or do_purge == false
+  when: (do_purge is undefined or do_purge == false) and get_log is undefined
   tags:
       - config
 

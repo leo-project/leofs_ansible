@@ -1,0 +1,11 @@
+---
+## Get Log from LeoFS Modules
+- hosts: leo_storage
+  name: Get Logs from LeoStorages
+  roles:
+      - { role: leo_storage, get_log: true}
+
+- hosts: leo_gateway
+  name: Get Logs from LeoGateways
+  roles:
+      - { role: leo_gateway, get_log: true}

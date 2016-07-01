@@ -23,3 +23,7 @@
 - name: Include Common Purge Instructions
   include: purge.yml
   when: do_purge is defined and do_purge
+
+- name: Include Get Log Instructions
+  include: get_log.yml
+  when: get_log is defined and get_log
