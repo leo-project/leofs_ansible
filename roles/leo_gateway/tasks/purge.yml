@@ -1,0 +1,10 @@
+---
+- name: Purge LeoStorage Data
+  file:
+      path: "{{ item }}"
+      state: absent
+  with_items: 
+      - "{{ leo_gateway_dcache_path }}"
+      - "{{ leo_gateway_dcache_journal }}"
+  tags:
+      - purge
