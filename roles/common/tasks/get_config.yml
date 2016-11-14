@@ -1,0 +1,6 @@
+---
+- name: Get Configs
+  synchronize:
+      mode: pull
+      src: "{{ leofs_module_conf_path }}"
+      dest: "config/{{ leofs_module_nodename }}"

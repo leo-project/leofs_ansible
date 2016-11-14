@@ -27,3 +27,7 @@
 - name: Include Get Log Instructions
   include: get_log.yml
   when: get_log is defined and get_log
+
+- name: Include Get Config Instructions
+  include: get_config.yml
+  when: get_config is defined and get_config
