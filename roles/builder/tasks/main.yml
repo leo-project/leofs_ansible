@@ -11,4 +11,9 @@
 - name: Build LeoFS (Selected Branch)
   run_once: true
   script: "{{ build_script}} {{ build_temp_path }} {{ build_branch }}"
-  when: build_branch is defined
+  when: build_branch is defined and erlang_ver is undefined
+
+- name: Build LeoFS (Selected Erlang Ver.)
+  run_once: true
+  script: "{{ build_script}} {{ build_temp_path }} {{ build_branch }} {{ erlang_ver }}"
+  when: build_branch is defined and erlang_ver is defined
