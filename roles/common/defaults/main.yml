@@ -32,6 +32,7 @@ leofs_watchdog_cpu_thres_load:  5.0
 leofs_watchdog_cpu_thres_util:  100
 
 leofs_log_level:    0
+leofs_access_log:   False
 leofs_log_dir:      "{{ leofs_module_path }}/log"
 leofs_log_erlang:   "{{ leofs_log_dir }}/erlang"
 leofs_log_app:      "{{ leofs_log_dir }}/app"

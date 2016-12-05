@@ -52,7 +52,5 @@ leo_gateway_qos_managers:
     - "savanna_manager_0@127.0.0.1"
     - "savanna_manager_1@127.0.0.1"
 
-leofs_access_log:   False
-
 leofs_snmp_agent:   "./snmp/snmpa_gateway_0/LEO-GATEWAY"
 leofs_snmp_conf:    "./snmp/snmpa_gateway_0/leo_gateway_snmp"

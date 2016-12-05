@@ -308,6 +308,10 @@ mdc_replication.stacking_procs = {{ leo_storage_mdc_stack_proc }}
 ## log.log_level = 1
 log.log_level = {{ leofs_log_level }}
 
+## Is enable access-log [true, false]
+## log.is_enable_access_log = false
+log.is_enable_access_log = {{ leofs_access_log | lower }}
+
 ## Output log file(s) - Erlang's log
 ## log.erlang = ./log/erlang
 log.erlang = {{ leofs_log_erlang }}
