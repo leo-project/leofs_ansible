@@ -42,6 +42,7 @@ leo_storage_compact_wait_time_reg:  500
 leo_storage_compact_wait_time_max:  3000
 leo_storage_compact_batch_reg:      1000
 leo_storage_compact_batch_max:      1500
+leo_storage_compact_skip_prefetch_size: 512
 
 leo_storage_mq_backend:             "leveldb"
 leo_storage_mq_num_procs:           8
