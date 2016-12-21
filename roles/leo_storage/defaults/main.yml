@@ -51,6 +51,10 @@ leo_storage_mq_batch_max:           3000
 leo_storage_mq_batch_inteval_reg:   500
 leo_storage_mq_batch_inteval_max:   3000
 
+leo_backend_db_eleveldb_write_buf_size: 62914560
+leo_backend_db_eleveldb_max_open_files: 1000
+leo_backend_db_eleveldb_sst_block_size: 4096
+
 # leo_storage_rep_rack_id:                
 leo_storage_rep_recovery_stack_size:    33554432
 leo_storage_rep_recovery_stack_timeout: 5

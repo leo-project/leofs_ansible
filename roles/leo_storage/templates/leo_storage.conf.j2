@@ -269,6 +269,19 @@ mq.interval_between_batch_procs_regular = {{ leo_storage_mq_batch_inteval_reg }}
 
 
 ## --------------------------------------------------------------------
+## STORAGE - Backend DB
+## --------------------------------------------------------------------
+## eleveldb Write Buffer Size
+backend_db.eleveldb.write_buf_size = {{ leo_backend_db_eleveldb_write_buf_size }}
+
+## eleveldb Max Open Files
+backend_db.eleveldb.max_open_files = {{ leo_backend_db_eleveldb_max_open_files }}
+
+## eleveldb SST Block Size
+backend_db.eleveldb.sst_block_size = {{ leo_backend_db_eleveldb_sst_block_size }}
+
+
+## --------------------------------------------------------------------
 ## STORAGE - Replication/Recovery object(s)
 ## --------------------------------------------------------------------
 ## Rack-id for the rack-awareness replica placement
