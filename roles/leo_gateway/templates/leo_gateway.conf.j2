@@ -144,6 +144,12 @@ large_object.threshold_of_chunk_len = {{ leo_gateway_chunk_thres }}
 ##   * default: "large_object.chunked_obj_len" (5242880 - 5MB)
 large_object.reading_chunked_obj_len = {{ leo_gateway_chunk_read_len }}
 
+## Large Object Handler - put worker pool size
+large_object.put_worker_pool_size = {{ leo_gateway_large_obj_pool_size }}
+
+## Large Object Handler - put worker buffer size
+large_object.put_worker_buffer_size = {{ leo_gateway_large_obj_buf_size }}
+
 
 ## --------------------------------------------------------------------
 ## GATEWAY - Cache
