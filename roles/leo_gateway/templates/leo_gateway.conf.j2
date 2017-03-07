@@ -120,6 +120,24 @@ nfs.nfsd.port = {{ leo_gateway_nfs_nfsd_port }}
 ## nfs.nfsd.acceptors = 128
 nfs.nfsd.acceptors = {{ leo_gateway_nfs_nfsd_acceptors }}
 
+## NFSd's rtmax included in the response of fsinfo
+## rtperf is set to the same value.
+nfs.nfsd.rtmax = {{ leo_gateway_nfs_nfsd_rtmax }}
+
+## NFSd's wtmax included in the response of fsinfo
+## wtperf is set to the same value.
+nfs.nfsd.wtmax = {{ leo_gateway_nfs_nfsd_wtmax }}
+
+## NFSd's Readdir Entry Table Scan Interval (leo-project/leofs#612)
+nfs.nfsd.readdir_scan_int = {{ leo_gateway_nfs_nfsd_readdir_scan_int }}
+
+## NFSd's Readdir Entry TTL (leo-project/leofs#612)
+nfs.nfsd.readdir_entry_ttl = {{ leo_gateway_nfs_nfsd_readdir_entry_ttl }}
+
+## NFSd's Readdir Entry Table Memory Scanning Threshold in bytes (leo-project/leofs#612)
+nfs.nfsd.readdir_mem_thres = {{ leo_gateway_nfs_nfsd_readdir_mem_thres }}
+
+
 ## --------------------------------------------------------------------
 ## GATEWAY - NLM-related configurations
 ## --------------------------------------------------------------------
