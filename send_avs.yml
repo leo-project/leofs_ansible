@@ -1,0 +1,7 @@
+---
+## Do Configuration
+- hosts: leo_storage
+  name: Send AVS
+  roles:
+      - { role: leo_storage, send_avs: true }
+

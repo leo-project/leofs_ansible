@@ -11,7 +11,7 @@
 
 - name: Create the LeoStorage Configuration File
   template: src=leo_storage.conf.j2 dest={{ leofs_module_conf_path }}/leo_storage.conf
-  when: get_log is undefined and (do_purge is undefined or do_purge == false)
+  when: get_log is undefined and send_avs is undefined and (do_purge is undefined or do_purge == false)
   tags:
       - config
 
@@ -22,3 +22,10 @@
 - name: Include Purge Instructions
   include: purge.yml
   when: do_purge is defined and do_purge
+
+- name: Send AVS Archive
+  unarchive:
+      src: "{{ leo_storage_avs_archive }}"
+      dest: "{{ leo_storage_container_paths[0] }}/../"
+  when: send_avs is defined and send_avs
+
