@@ -9,7 +9,7 @@ fi
 if [ $# -ge 3 ]; then
     . /erlang/$3/activate
 else
-    . /erlang/17.5/activate
+    . /erlang/18.3/activate
 fi
 
 git clone https://github.com/leo-project/leofs.git $1
