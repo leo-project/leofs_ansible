@@ -1,3 +1,0 @@
----
-leofs_package: "leofs-{{ leofs_version }}-1.el6.x86_64.rpm"
-leofs_package_url: "https://github.com/leo-project/leofs/releases/download/{{ leofs_version }}/leofs-{{ leofs_version }}-1.el6.x86_64.rpm"
