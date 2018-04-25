@@ -1,0 +1,3 @@
+---
+leofs_package: "leofs_{{ leofs_version }}_ubuntu-18.04_amd64.deb"
+leofs_package_url: "https://github.com/leo-project/leofs/releases/download/{{ leofs_version }}/leofs_{{ leofs_version }}-1_ubuntu-18.04_amd64.deb"
