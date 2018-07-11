@@ -3,6 +3,8 @@
   file:
       path: "{{ item }}"
       state: directory
+      owner: leofs
+      group: leofs
   with_items: 
       - "{{ leo_storage_container_paths }}" 
   when: control_leofs is undefined and do_purge is undefined and get_log is undefined
