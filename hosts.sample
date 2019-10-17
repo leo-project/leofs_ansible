@@ -1,6 +1,6 @@
 # Please check roles/common/vars/leofs_releases for available versions
 [all:vars]
-leofs_version=1.2.22
+leofs_version=1.4.3
 build_temp_path="/tmp/leofs_builder"
 build_install_path="/tmp/"
 build_branch="master"
@@ -11,11 +11,11 @@ source="package"
 
 # nodename of leo_manager_0 and leo_manager_1 are set at group_vars/all
 [leo_manager_0]
-192.168.100.35 
+192.168.100.35
 
 # nodename of leo_manager_0 and leo_manager_1 are set at group_vars/all
 [leo_manager_1]
-192.168.100.35 
+192.168.100.35
 
 [leo_storage]
 192.168.100.36 leofs_module_nodename=S0@192.168.100.36
