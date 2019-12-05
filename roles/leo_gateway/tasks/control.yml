@@ -2,6 +2,8 @@
 
 - name: Run LeoGateway
   command: bin/leo_gateway start
+  become: true
+  become_user: root
   when: control_leofs is defined and control_leofs == "start"
   args:
     chdir: "{{ leofs_module_path }}"
@@ -10,6 +12,8 @@
 
 - name: Stop LeoGateway
   command: bin/leo_gateway stop
+  become: true
+  become_user: root
   when: control_leofs is defined and control_leofs == "stop"
   args:
     chdir: "{{ leofs_module_path }}"

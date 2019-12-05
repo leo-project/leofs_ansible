@@ -1,21 +1,25 @@
 ---
 ## Do Configuration
 - hosts: leo_manager_0
+  become: yes
   name: Config LeoManager (Primary)
   roles:
       - { role: leo_manager_0, do_config: true }
 
 - hosts: leo_manager_1
   name: Config LeoManager (Secondary)
+  become: yes
   roles:
       - { role: leo_manager_1, do_config: true }
 
 - hosts: leo_gateway
+  become: yes
   name: Config LeoGateway
   roles:
       - { role: leo_gateway, do_config: true }
 
 - hosts: leo_storage
+  become: yes
   name: Config LeoStorage
   roles:
       - { role: leo_storage, do_config: true }

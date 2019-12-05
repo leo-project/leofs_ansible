@@ -2,6 +2,7 @@
 
 ## Install from Package
 - hosts: leofs_nodes
+  become: yes
   name: Install LeoFS From Package
   roles:
       - { role: common, do_install: true }

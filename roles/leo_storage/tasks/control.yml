@@ -1,6 +1,8 @@
 ---
 - name: Run LeoStorage
   command: bin/leo_storage start
+  become: true
+  become_user: root
   when: control_leofs is defined and control_leofs == "start"
   args:
     chdir: "{{ leofs_module_path }}"
@@ -9,6 +11,8 @@
 
 - name: Stop LeoStorage
   command: bin/leo_storage stop
+  become: true
+  become_user: root
   when: control_leofs is defined and control_leofs == "stop"
   args:
     chdir: "{{ leofs_module_path }}"

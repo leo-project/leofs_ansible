@@ -2,6 +2,8 @@
 
 - name: Run LeoManager (Primary)
   command: bin/leo_manager start
+  become: true
+  become_user: root
   when: control_leofs is defined and control_leofs == "start"
   args:
     chdir: "{{ leofs_module_path }}"
@@ -10,6 +12,8 @@
 
 - name: Stop LeoManager (Primary)
   command: bin/leo_manager stop
+  become: true
+  become_user: root
   when: control_leofs is defined and control_leofs == "stop"
   args:
     chdir: "{{ leofs_module_path }}"

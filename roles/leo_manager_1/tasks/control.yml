@@ -1,6 +1,8 @@
 ---
 
 - name: Run LeoManager (Secondary)
+  become: true
+  become_user: root
   command: bin/leo_manager start
   when: control_leofs is defined and control_leofs == "start"
   args:
@@ -9,6 +11,8 @@
       - run
 
 - name: Stop LeoManager (Secondary)
+  become: true
+  become_user: root
   command: bin/leo_manager stop
   when: control_leofs is defined and control_leofs == "stop"
   args:
