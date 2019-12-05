@@ -1,0 +1,49 @@
+---
+- hosts: all
+  gather_facts: False
+  become: yes
+  tasks:
+    - name: Install libselinux as prerequisite for SELinux Ansible module
+      yum:
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - libselinux-python
+        - libsemanage-python
+
+    - name: Disable SELinux at next reboot
+      selinux:
+        state: disabled
+
+    - name: Set SELinux in permissive mode until the machine is rebooted
+      command: setenforce 0
+      ignore_errors: true
+      changed_when: false
+
+    - name: Install Packages
+      yum: name={{ item }} state=present
+      with_items:
+        - nmap-ncat
+        - redhat-lsb-core
+
+    - name: Create user leofs
+      group:
+        name: leofs
+        state: present
+
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
+    - name: Add the user 'leofs' to group 'wheel'
+      user:
+        name: leofs
+        groups: wheel
+        append: yes
+
+    - name: Remote erlang-20.3.8.23-1.el7.x86_64.rpm install with yum
+      yum: name=https://github.com/rabbitmq/erlang-rpm/releases/download/v20.3.8.23/erlang-20.3.8.23-1.el7.x86_64.rpm
